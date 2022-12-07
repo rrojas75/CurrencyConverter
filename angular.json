@@ -102,5 +102,7 @@
       }
     }
   },
-  "defaultProject": "CurrencyConverter"
+  "cli": {
+    "analytics": false
+  }
 }
