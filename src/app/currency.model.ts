@@ -1,6 +1,13 @@
 export enum DefaultCurrency  {
   PHP = 'PHP',
   USD = 'USD',
+  PLN = 'PLN',
+}
+
+export enum CurrencyTableOption  {
+  A = 'A',
+  B = 'B',
+  C = 'C',
 }
 
 export interface CurrencyTable {
@@ -13,7 +20,8 @@ export interface CurrencyTable {
 export interface CurrencyTableRate {
   code: string;
   currency: string;
-  mid: number;
+  mid?: number;
+  bid?: number;
 }
 
 export interface CurrencyHistory {
@@ -25,6 +33,7 @@ export interface CurrencyHistory {
 
 export interface CurrencyHistoryRate {
   effectiveDate: string;
-  mid: number;
+  mid?: number;
   no: string;
+  bid?: number;
 }

@@ -5,7 +5,10 @@
       <div [formGroup]="formGroup" class="column form">
         <div class="row">
           <div class="column">
-            <select formControlName="fromCurrencyCode">
+            <select formControlName="fromCurrencyCode" >
+              <option [value]="defaultCurrencies.PLN">
+                {{ defaultCurrencies.PLN }}
+              </option>
               <option
                 *ngFor="let currency of currencies"
                 [value]="currency.code"
@@ -13,10 +16,18 @@
                 {{ currency.code }}
               </option>
             </select>
-            <input formControlName="fromAmount" type="number" />
+            <input
+              formControlName="fromAmount"
+              type="number"
+              (focus)="onFocusFromAmountField()"
+              (blur)="isEditingFromAmount = false"
+            />
           </div>
           <div class="column">
             <select formControlName="toCurrencyCode">
+              <option [value]="defaultCurrencies.PLN">
+                {{ defaultCurrencies.PLN }}
+              </option>
               <option
                 *ngFor="let currency of currencies"
                 [value]="currency.code"
@@ -24,7 +35,12 @@
                 {{ currency.code }}
               </option>
             </select>
-            <input formControlName="toAmount" type="number" />
+            <input
+              formControlName="toAmount"
+              type="number"
+              (focus)="onFocusToAmountField()"
+              (blur)="isEditingToAmount = false"
+            />
           </div>
         </div>
       </div>

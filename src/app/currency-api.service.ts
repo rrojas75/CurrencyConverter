@@ -12,8 +12,8 @@ import { map } from 'rxjs/operators';
 export class CurrencyApiService {
   constructor(private http: HttpClient) {}
 
-  getCurrencies(): Observable<CurrencyTableRate[]> {
-    return this.getCurrencyTable().pipe(
+  getCurrencies(tableCode: string): Observable<CurrencyTableRate[]> {
+    return this.getCurrencyTable(tableCode).pipe(
       map((response) =>
         response[0].rates?.map((rate: CurrencyTableRate) => ({
           code: rate.code,
@@ -25,18 +25,19 @@ export class CurrencyApiService {
   }
 
   getPastCurrencyRate(
+    tableCode: string,
     code: string,
     startDate: string,
     endDate: string
   ): Observable<CurrencyHistory> {
     return this.http.get<CurrencyHistory>(
-      `http://api.nbp.pl/api/exchangerates/rates/a/${code}/${startDate}/${endDate}/`
+      `http://api.nbp.pl/api/exchangerates/rates/${tableCode}/${code}/${startDate}/${endDate}/`
     );
   }
 
-  private getCurrencyTable(): Observable<CurrencyTable[]> {
+  private getCurrencyTable(tableCode: string): Observable<CurrencyTable[]> {
     return this.http.get<CurrencyTable[]>(
-      'http://api.nbp.pl/api/exchangerates/tables/a/'
+      `http://api.nbp.pl/api/exchangerates/tables/${tableCode}/`
     );
   }
 }
